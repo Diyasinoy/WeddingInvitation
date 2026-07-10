@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jibin & Thara — Wedding Invitation</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Canvas Confetti Library CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            serif: ['Playfair Display', 'serif'],
+            garamond: ['Cormorant Garamond', 'serif'],
+            sans: ['Montserrat', 'sans-serif'],
+          },
+          colors: {
+            olive: {
+              DEFAULT: '#3D5240',
+              dark: '#2B3B2E',
+              light: '#536E57',
+              pale: '#E2E8E3',
+            },
+            cream: {
+              DEFAULT: '#FAF7F2',
+              white: '#FFFFFF',
+              dark: '#EAE5DC',
+            },
+            gold: {
+              DEFAULT: '#C5A880',
+              hover: '#B3966E',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3D5240;
+      border-radius: 3px;
+    }
+
+    /* Hanging Animation with Custom Slower Dropping Speeds for Majestic Elegance */
+    .hanging-container-left {
+      transform-origin: top center;
+      animation: hangDropLeft 5.2s cubic-bezier(0.15, 0.85, 0.3, 1) forwards, swingLeft 4.5s ease-in-out infinite 5.2s;
+    }
+    
+    .hanging-container-right {
+      transform-origin: top center;
+      animation: hangDropRight 5.8s cubic-bezier(0.15, 0.85, 0.3, 1) forwards, swingRight 5s ease-in-out infinite 5.8s;
+    }
+
+    @keyframes hangDropLeft {
+      0% { transform: translateY(-130%) rotate(-15deg); }
+      75% { transform: translateY(3%) rotate(4deg); }
+      100% { transform: translateY(0) rotate(-2deg); }
+    }
+
+    @keyframes hangDropRight {
+      0% { transform: translateY(-130%) rotate(15deg); }
+      75% { transform: translateY(3%) rotate(4deg); }
+      100% { transform: translateY(0) rotate(2deg); }
+    }
+
+    @keyframes swingLeft {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(1.5deg); }
+    }
+
+    @keyframes swingRight {
+      0%, 100% { transform: rotate(2deg); }
+      50% { transform: rotate(-1.5deg); }
+    }
+
+    /* Pulse effect for golden heart */
+    .pulse-heart {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1) translate(-50%, -50%); }
+      50% { transform: scale(1.1) translate(-50%, -50%); }
+    }
+
+    /* Ribbon Page Transition */
+    .ribbon-unravel {
+      animation: unravel 1.2s forwards ease-in-out;
+    }
+    @keyframes unravel {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05) rotate(1deg); opacity: 0.8; }
+      100% { transform: scale(0.9) translateY(-100px); opacity: 0; }
+    }
+
+    /* Dynamic slide-down for elements */
+    .expand-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out;
+    }
+    .expand-content.open {
+      max-height: 300px;
+    }
+  </style>
+</head>
+<body class="bg-cream text-olive font-sans overflow-x-hidden selection:bg-olive selection:text-cream">
+
+  <!-- Background Ambient Audio -->
+  <audio id="bg-audio" src="Heartbeats.mp3" loop></audio>
+
+  <!-- ==========================================
+       SCREEN 1: HANGING PORTRAITS SPLASH SCREEN
+       ========================================== -->
+  <section id="screen-splash" class="fixed inset-0 z-50 flex flex-col justify-between px-4 py-6 md:py-8 overflow-y-auto bg-black h-[100dvh] w-full">
+    
+    <!-- Video background element -->
+    <video autoplay loop muted playsinline id="bg-video" class="absolute inset-0 w-full h-full object-cover z-[-2] opacity-80" poster="couple_bg.png">
+      <source src="video/vidoo.mp4" type="video/mp4">
+      <source src="https://assets.mixkit.co/videos/preview/kit-wedding-couple-under-a-veil-romantic-moment-40012-large.mp4" type="video/mp4">
+      <img src="couple_bg.png" alt="Loving couple background" class="w-full h-full object-cover">
+    </video>
+    
+    <!-- Rich Semi-Transparent Olive Green Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-olive-dark/95 via-olive/80 to-olive-dark/95 z-[-1] pointer-events-none"></div>
+
+    <!-- Top Headline -->
+    <div class="text-center mt-2 flex-shrink-0 relative z-10">
+      <span class="text-[11px] md:text-xs uppercase tracking-[0.4em] text-gold font-bold block mb-1">Save Our Date</span>
+      <h1 class="text-lg md:text-2xl uppercase tracking-[0.22em] text-cream font-medium font-cinzel leading-tight drop-shadow-sm">
+        WE ARE GETTING MARRIED
+      </h1>
+      <div class="w-16 h-[1px] bg-gold mx-auto mt-3"></div>
+    </div>
+
+    <!-- Hanging Portraits Grid Area -->
+    <div class="my-auto py-2 md:py-4 flex flex-col items-center justify-center relative z-10 min-h-[40vh] md:min-h-[45vh]">
+      <div class="relative flex items-center justify-center gap-4 md:gap-6 max-w-md w-full px-4">
+        
+        <!-- HANGING PORTRAIT 1 (GROOM - JIBIN) -->
+        <div class="hanging-container-left relative w-[46%] flex flex-col items-center">
+          <div class="w-[1.5px] h-10 md:h-16 bg-gradient-to-b from-transparent to-gold"></div>
+          <div class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gold border border-white shadow-sm -mt-1 md:-mt-1.5 z-10"></div>
+          
+          <div class="relative w-full aspect-[3/4] overflow-hidden border-2 border-gold shadow-2xl bg-cream-dark mt-1 z-10">
+            <img 
+              src="img/appuz.png" 
+              alt="Jibin (Groom)" 
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              onerror="this.src='https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=400'"
+            />
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-olive-dark/90 to-transparent py-1.5 md:py-2.5 text-center">
+              <span class="font-serif italic text-white text-xs md:text-base tracking-widest">Jibin</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Glowing Central Golden Heart Intersect -->
+        <div class="absolute z-30 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 pulse-heart w-9 h-9 md:w-11 md:h-11 rounded-full bg-cream shadow-2xl border border-gold/50 flex items-center justify-center">
+          <i class="fa-solid fa-heart text-gold text-sm md:text-lg"></i>
+        </div>
+
+        <!-- HANGING PORTRAIT 2 (BRIDE - THARA) -->
+        <div class="hanging-container-right relative w-[46%] flex flex-col items-center">
+          <div class="w-[1.5px] h-10 md:h-16 bg-gradient-to-b from-transparent to-gold"></div>
+          <div class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-gold border border-white shadow-sm -mt-1 md:-mt-1.5 z-10"></div>
+          
+          <div class="relative w-full aspect-[3/4] overflow-hidden border-2 border-gold shadow-2xl bg-cream-dark mt-1 z-10">
+            <img 
+              src="img/tharaz.png" 
+              alt="Thara (Bride)" 
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              onerror="this.src='https://images.unsplash.com/photo-1594744803329-e58b31de215f?auto=format&fit=crop&q=80&w=400'"
+            />
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-olive-dark/90 to-transparent py-1.5 md:py-2.5 text-center">
+              <span class="font-serif italic text-white text-xs md:text-base tracking-widest">Thara</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Actions and Title -->
+    <div class="text-center flex-shrink-0 space-y-3 md:space-y-4 pb-2 relative z-10">
+      <div>
+        <h2 class="font-cinzel text-2xl md:text-4xl text-cream font-normal tracking-wide drop-shadow">
+          Jibin <span class="font-serif italic text-gold text-xl md:text-3xl">&</span> Thara
+        </h2>
+        <p class="text-gold font-serif italic text-xs md:text-base tracking-[0.25em] mt-1 drop-shadow-sm">
+          July 25, 2026
+        </p>
+      </div>
+
+      <div class="pt-1">
+        <button 
+          onclick="openInvitation()"
+          class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-cream text-olive-dark hover:bg-white font-medium text-[10px] md:text-[11px] uppercase tracking-[0.21em] shadow-xl transition-all duration-300 hover:shadow-2xl active:scale-95 group"
+        >
+          <span>Open The Invitation</span>
+          <i class="fa-solid fa-sparkles text-gold group-hover:rotate-12 transition-transform"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SCREEN 2: THE FAIRYTALE RIBBON PAGE
+       ========================================== -->
+  <section id="screen-ribbon" class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-olive text-white px-4 py-8 transition-all duration-1000 overflow-y-auto w-full h-[100dvh]">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(61,82,64,0.7)_0%,rgba(27,38,29,0.95)_100%)] opacity-95"></div>
+
+    <div id="ribbon-box" class="text-center max-w-2xl transition-all duration-1000 transform scale-100 opacity-100 relative z-10 px-4 w-full">
+      <div class="mb-3 md:mb-4 flex justify-center text-gold/60 gap-1 text-xs">
+        <i class="fa-solid fa-seedling"></i>
+        <i class="fa-solid fa-star text-[8px] self-center"></i>
+        <i class="fa-solid fa-seedling transform -scale-x-100"></i>
+      </div>
+
+      <div class="relative inline-block py-6 px-4 md:py-10 md:px-16 border-l border-r border-gold/30 my-4 md:my-6 shadow-[0_15px_40px_rgba(0,0,0,0.4)] bg-olive-dark/95 backdrop-blur-md rounded-md w-full">
+        
+        <div class="absolute top-2 left-2 text-gold/30 text-xs"><i class="fa-solid fa-leaf"></i></div>
+        <div class="absolute top-2 right-2 text-gold/30 text-xs"><i class="fa-solid fa-leaf transform -scale-x-100"></i></div>
+        <div class="absolute bottom-2 left-2 text-gold/30 text-xs"><i class="fa-solid fa-leaf transform -scale-y-100"></i></div>
+        <div class="absolute bottom-2 right-2 text-gold/30 text-xs"><i class="fa-solid fa-leaf transform -scale-100"></i></div>
+
+        <span class="text-[9px] md:text-xs uppercase tracking-[0.35em] text-gold font-semibold block mb-2 md:mb-3">Our Chapter Unfolds</span>
+
+        <p class="font-serif italic text-xl md:text-4xl text-cream tracking-wide leading-relaxed px-2 md:px-4">
+          "Here the fairytale begins..."
+        </p>
+
+        <div class="flex items-center justify-center my-4 md:my-6 gap-2 opacity-60">
+          <div class="w-8 h-[1px] bg-gold/50"></div>
+          <div class="w-1.5 h-1.5 rotate-45 bg-gold"></div>
+          <div class="w-8 h-[1px] bg-gold/50"></div>
+        </div>
+
+        <div class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-cream-dark/90 font-light px-2">
+          Tap the key below to reveal the vows
+        </div>
+      </div>
+
+      <div class="mt-4 md:mt-8 flex justify-center">
+        <button 
+          onclick="unravelRibbon()"
+          class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-gold/50 flex items-center justify-center hover:bg-gold hover:text-olive transition-all duration-500 animate-bounce bg-[#293B2B]/60 shadow-lg cursor-pointer group"
+          title="Unlock Invitation"
+        >
+          <i class="fa-solid fa-key text-gold text-base md:text-lg group-hover:rotate-45 transition-transform duration-300"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SCREEN 3: MAIN ELEGANT INVITATION PAGE
+       ========================================== -->
+  <main id="screen-main" class="hidden relative z-10 animate-fade-in pb-24 w-full">
+
+    <!-- Persistent Music Float Toggle Controller -->
+    <div class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40">
+      <button 
+        onclick="toggleMusic()"
+        id="music-btn"
+        class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-olive text-white flex items-center justify-center shadow-2xl hover:bg-olive-dark transition-all duration-300 border border-gold/30"
+        title="Play / Pause Music"
+      >
+        <i class="fa-solid fa-volume-xmark text-stone-300 text-sm md:text-base" id="music-icon"></i>
+      </button>
+    </div>
+
+    <!-- 1. HERO MAIN HEADER -->
+    <section class="relative min-h-[95vh] flex flex-col items-center justify-center text-center px-4 py-16 md:py-20 overflow-hidden w-full">
+      <img 
+        src="img/bg.jpg" 
+        alt="Hero Background" 
+        class="absolute inset-0 w-full h-full object-cover pointer-events-none z-[-2]"
+        onerror="this.src='https://images.unsplash.com/photo-1519225495810-7517cbd14bc4?auto=format&fit=crop&q=80&w=1200'"
+      />
+      <div class="absolute inset-0 bg-[#E4E4E7]/70 pointer-events-none z-[-1]"></div>
+
+      <div class="absolute top-3 left-3 right-3 bottom-3 md:top-6 md:left-6 md:right-6 md:bottom-6 border border-olive/10 pointer-events-none rounded-lg z-10"></div>
+      <div class="absolute top-4 left-4 right-4 bottom-4 md:top-8 md:left-8 md:right-8 md:bottom-8 border border-gold/25 pointer-events-none rounded-lg z-10"></div>
+
+      <div class="max-w-3xl mx-auto z-10 px-4 relative w-full">
+        <span class="text-sm md:text-base uppercase tracking-[0.4em] text-olive font-black block mb-3 drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)]">Save Our Date</span>
+        <h1 class="text-2xl md:text-5xl uppercase tracking-[0.25em] text-olive font-black font-cinzel leading-tight drop-shadow-[0_2px_4px_rgba(255,255,255,0.5)]">
+          WE ARE GETTING MARRIED
+        </h1>
+        
+        <p class="font-serif italic text-base md:text-2xl text-olive mt-4 md:mt-5 max-w-xl mx-auto drop-shadow-[0_1px_2px_rgba(255,255,255,0.3)] font-bold px-2">
+          "Two souls bound by love, beginning their beautiful walk hand-in-hand into forever."
+        </p>
+
+        <div class="flex items-center justify-center my-4 md:my-6 gap-2 md:gap-3">
+          <div class="w-8 md:w-12 h-[1.5px] bg-gold"></div>
+          <div class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-gold"></div>
+          <div class="w-8 md:w-12 h-[1.5px] bg-gold"></div>
+        </div>
+
+        <div class="my-4 md:my-6">
+          <h2 class="font-cinzel text-4xl md:text-7xl text-olive font-black tracking-wide py-1 drop-shadow-md">
+            Jibin <span class="font-serif italic text-gold text-3xl md:text-6xl">&</span> Thara
+          </h2>
+          <div class="w-16 md:w-20 h-[1.5px] bg-gold/60 mx-auto mt-3 md:mt-4"></div>
+        </div>
+
+        <!-- SCRATCH TO REVEAL CONTAINER -->
+        <div class="relative max-w-[320px] w-full aspect-[20/9] mx-auto my-6 md:my-8 select-none shadow-[0_6px_30px_rgba(43,59,46,0.25)] rounded-xl overflow-hidden z-20" id="scratch-card-container">
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-white border-2 border-gold/20 rounded-xl p-4">
+            <span class="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-gold font-bold block mb-1">Our Wedding Date</span>
+            <h3 class="font-serif text-xl md:text-3xl text-olive tracking-wider font-bold">
+              July 25, 2026
+            </h3>
+            <p class="text-[9px] md:text-xs uppercase tracking-[0.25em] text-gold font-bold mt-1">
+              Saturday Afternoon • 3:00 PM
+            </p>
+          </div>
+          <canvas id="scratch-canvas" class="absolute inset-0 cursor-pointer rounded-xl touch-none z-20 w-full h-full" width="320" height="144"></canvas>
+        </div>
+
+        <!-- REVEALED BIBLE VERSE QUOTE & DECORATION -->
+        <div id="revealed-scripture-box" class="max-w-xl mx-auto opacity-0 scale-95 -translate-y-2 pointer-events-none transition-all duration-1000 mt-6 select-none text-center">
+          <div class="flex items-center justify-center gap-2 mb-3">
+            <div class="w-8 h-[1px] bg-gold/50"></div>
+            <i class="fa-solid fa-heart text-gold text-[10px] animate-pulse"></i>
+            <div class="w-8 h-[1px] bg-gold/50"></div>
+          </div>
+          <blockquote id="scripture-text" class="font-serif italic text-sm md:text-xl text-olive font-extrabold tracking-wide leading-relaxed px-4">
+            "The Lord has done great things for us and we are filled with joy"
+          </blockquote>
+          <cite id="scripture-cite" class="block text-[10px] md:text-xs uppercase tracking-[0.25em] text-gold font-extrabold mt-1 font-sans">
+            (Psalms 126:3)
+          </cite>
+        </div>
+
+        <div class="mt-10 md:mt-14 animate-bounce">
+          <i class="fa-solid fa-chevron-down text-gold text-base md:text-lg"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. THE LOVE QUOTE SECTION -->
+    <section class="py-12 md:py-20 bg-white text-center px-6 border-b border-stone-100 w-full">
+      <div class="max-w-2xl mx-auto w-full">
+        <div class="flex items-center justify-center gap-3 mb-4 md:mb-6">
+          <div class="w-8 h-[1px] bg-gold"></div>
+          <i class="fa-solid fa-heart text-gold text-sm"></i>
+          <div class="w-8 h-[1px] bg-gold"></div>
+        </div>
+
+        <blockquote class="font-garamond italic text-xl md:text-4xl text-olive leading-relaxed font-normal">
+          "True love stories never have endings. They are filled with shared hopes, gentle understanding, and beautiful fairytales."
+        </blockquote>
+        
+        <cite class="block mt-3 md:mt-4 text-[9px] md:text-xs uppercase tracking-[0.25em] text-gold not-italic font-bold">
+          — ANONYMOUS
+        </cite>
+      </div>
+    </section>
+
+    <!-- 3. OUR STORY / JOURNEY -->
+    <section class="py-12 md:py-20 bg-cream px-4 md:px-6 w-full">
+      <div class="max-w-5xl mx-auto w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+          
+          <div class="lg:col-span-5 space-y-4 md:space-y-6 text-center lg:text-left">
+            <span class="text-xs uppercase tracking-[0.3em] text-gold font-bold block">Our Journey</span>
+            <h2 class="font-cinzel text-2xl md:text-4xl text-olive font-medium leading-snug">
+              The Beginning of Forever
+            </h2>
+            <div class="w-12 h-[2px] bg-gold mx-auto lg:mx-0"></div>
+            
+            <p class="text-olive/80 text-sm md:text-lg font-garamond leading-relaxed font-semibold">
+              It began with quiet glances and soon bloomed into beautiful pathways shared side-by-side. As Jibin & Thara prepare to step into their unified tomorrow, we reflect on a beautiful friendship that became an enduring romance. Hand-in-hand, their fairytale unfolds in the presence of those they cherish most.
+            </p>
+          </div>
+
+          <div class="lg:col-span-7 relative w-full flex justify-center items-center">
+            <div class="absolute -inset-2 bg-olive/5 rounded-[2rem] transform rotate-1"></div>
+            <div class="relative rounded-[1.5rem] overflow-hidden shadow-xl border-4 border-white bg-cream-dark w-full max-h-[450px] flex items-center justify-center">
+              <img 
+                src="img/journey_.jpg" 
+                alt="Jibin & Thara Journey" 
+                class="max-w-full max-h-[400px] w-auto h-auto object-contain block mx-auto rounded-[1.2rem] shadow-inner"
+                onerror="this.src='https://images.unsplash.com/photo-1519225495810-7517cbd14bc4?auto=format&fit=crop&q=80&w=1000'"
+              />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. MEET THE FAMILIES -->
+    <section class="py-12 md:py-20 bg-cream px-4 md:px-6 w-full">
+      <div class="max-w-4xl mx-auto w-full">
+        <span class="text-xs uppercase tracking-[0.3em] text-gold font-bold block mb-2">Blessed Ties</span>
+        <h2 class="font-cinzel text-2xl md:text-4xl text-olive font-semibold mb-2 text-center">
+          Our Loving Families
+        </h2>
+        <div class="w-16 h-[1px] bg-gold mx-auto mt-2 mb-8 md:mb-10"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto text-left w-full">
+          
+          <!-- Groom's Family Card -->
+          <div class="bg-white rounded-[1.5rem] p-5 md:p-6 shadow-sm border border-stone-200/50 relative overflow-hidden w-full">
+            <div class="flex flex-col items-center text-center">
+              <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gold bg-cream flex items-center justify-center mb-3 md:mb-4">
+                <i class="fa-solid fa-users text-olive text-sm md:text-base"></i>
+              </div>
+              <h3 class="font-cinzel text-lg md:text-xl text-olive font-bold">The Groom's Family</h3>
+              <span class="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-gold font-bold mb-3 block">Family of Jibin</span>
+              <p class="text-xs text-stone-700 font-semibold leading-relaxed mb-4">
+                Solicit your esteemed presence and blessings with family on this auspicious occasion of the marriage of our son.
+              </p>
+
+              <button 
+                onclick="toggleFamily('groom')"
+                class="inline-flex items-center gap-1 text-[10px] md:text-[11px] uppercase tracking-wider text-gold font-bold focus:outline-none"
+              >
+                <span id="groom-toggle-text">See Parents & Address</span>
+                <i class="fa-solid fa-chevron-down text-[10px] transition-transform" id="groom-toggle-icon"></i>
+              </button>
+
+              <div id="groom-family-details" class="expand-content w-full text-center">
+                <div class="pt-4 border-t border-stone-100 mt-4">
+                  <p class="font-serif text-sm font-bold text-olive">Mr. Varkey Thomas & Mrs. Molly Varghese</p>
+                  <p class="text-[11px] text-stone-700 font-bold mt-1 font-sans">Kannamplackal (H) Kanjikuzhy, Idukki</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bride's Family Card -->
+          <div class="bg-white rounded-[1.5rem] p-5 md:p-6 shadow-sm border border-stone-200/50 relative overflow-hidden w-full">
+            <div class="flex flex-col items-center text-center">
+              <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gold bg-cream flex items-center justify-center mb-3 md:mb-4">
+                <i class="fa-solid fa-users text-olive text-sm md:text-base"></i>
+              </div>
+              <h3 class="font-cinzel text-lg md:text-xl text-olive font-bold">The Bride's Family</h3>
+              <span class="text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-gold font-bold mb-3 block">Family of Thara</span>
+              <p class="text-xs text-stone-700 font-semibold leading-relaxed mb-4">
+                Solicit your esteemed presence and blessings on this beautiful celebration of the marriage of our daughter.
+              </p>
+
+              <button 
+                onclick="toggleFamily('bride')"
+                class="inline-flex items-center gap-1 text-[10px] md:text-[11px] uppercase tracking-wider text-gold font-bold focus:outline-none"
+              >
+                <span id="bride-toggle-text">See Parents & Address</span>
+                <i class="fa-solid fa-chevron-down text-[10px] transition-transform" id="bride-toggle-icon"></i>
+              </button>
+
+              <div id="bride-family-details" class="expand-content w-full text-center">
+                <div class="pt-4 border-t border-stone-100 mt-4">
+                  <p class="font-serif text-sm font-bold text-olive">Mr. James Sebastian & Mrs. Joyamma James</p>
+                  <p class="text-[11px] text-stone-700 font-bold mt-1 font-sans">Vadakkemulanjanal (H) Melukavu, Kottayam</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. MEMORIES SLIDER -->
+    <section class="py-12 md:py-20 bg-white px-4 md:px-6 text-center w-full">
+      <div class="max-w-4xl mx-auto w-full">
+        <span class="text-xs uppercase tracking-[0.3em] text-gold font-semibold block mb-2">Beautiful Memories</span>
+        <h2 class="font-cinzel text-2xl md:text-4xl text-olive font-medium mb-8 md:mb-10">
+          Capturing Our Love
+        </h2>
+
+        <!-- Image Carousel Box with custom responsive maximum width -->
+        <div class="relative max-w-[440px] mx-auto bg-cream rounded-[2rem] p-3 md:p-4 shadow-md border border-stone-200/50 w-full">
+          
+          <div id="carousel-box" class="relative w-full rounded-[1.5rem] overflow-hidden bg-cream-dark shadow-inner transition-opacity duration-300 ease-in-out">
+            
+            <img 
+              id="carousel-img"
+              src="car1i.jpg" 
+              alt="Memory Slide" 
+              class="w-full h-auto block select-none rounded-[1.5rem]"
+              onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1000'"
+            />
+            
+            <!-- Prev/Next Navigation Controls -->
+            <button 
+              onclick="prevSlide()"
+              class="absolute left-2.5 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-white/95 text-olive flex items-center justify-center shadow hover:bg-white z-20"
+            >
+              <i class="fa-solid fa-chevron-left text-xs"></i>
+            </button>
+
+            <button 
+              onclick="nextSlide()"
+              class="absolute right-2.5 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full bg-white/95 text-olive flex items-center justify-center shadow hover:bg-white z-20"
+            >
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+
+          <div class="mt-3 md:mt-4 px-1 min-h-[3rem] flex items-center justify-center">
+            <p id="carousel-caption" class="font-garamond italic text-xs md:text-sm text-olive font-semibold leading-snug">
+              Jibin & Thara — "Once in a while, right in the middle of an ordinary life, love gives us a fairytale."
+            </p>
+          </div>
+
+          <!-- Slide Indicators -->
+          <div id="slide-indicators" class="flex justify-center gap-1.5 mt-2 pb-1">
+            <!-- Generated dynamically -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. WHERE & WHEN -->
+    <section class="py-12 md:py-20 bg-white px-4 md:px-6 text-center w-full">
+      <div class="max-w-4xl mx-auto w-full">
+        <span class="text-xs uppercase tracking-[0.3em] text-gold font-bold block mb-2">Plan Your Day</span>
+        <h2 class="font-cinzel text-2xl md:text-4xl text-olive font-semibold mb-6 md:mb-8">
+          Where & When
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto text-left w-full">
+          
+          <!-- Ceremony Venue Card -->
+          <div class="bg-cream rounded-[1.5rem] p-5 md:p-8 border border-gold/20 shadow-sm relative flex flex-col justify-between transition-transform duration-300 hover:scale-[1.01] w-full">
+            <div>
+              <div class="w-10 h-10 rounded-full bg-white text-gold flex items-center justify-center mb-3 md:mb-4 shadow-sm">
+                <i class="fa-solid fa-map-pin text-sm"></i>
+              </div>
+              <h3 class="font-serif text-lg md:text-2xl text-olive font-bold mb-1">Holy Matrimony</h3>
+              <div class="flex items-center gap-1.5 text-[10px] md:text-xs text-olive font-bold uppercase tracking-wider mb-3 md:mb-4">
+                <i class="fa-solid fa-clock"></i>
+                <span>3:00 PM Afternoon</span>
+              </div>
+              <p class="text-xs md:text-sm text-olive font-garamond leading-relaxed mb-4 md:mb-6 font-semibold">
+                Please join us as Jibin and Thara exchange sacred vows of marriage and unite as one.
+              </p>
+            </div>
+            
+            <div class="border-t border-stone-200/60 pt-4 mt-auto">
+              <h4 class="font-serif text-sm font-bold text-olive font-bold">St. Mary's Church, Kanjikuzhy</h4>
+              <p class="text-[10px] md:text-[11px] text-stone-700 font-sans mt-1 font-bold">Kanjikuzhy, Idukki, Kerala, India</p>
+              
+              <!-- Eye-catching Map Link Button -->
+              <a 
+                href="https://maps.google.com/?q=St.+Marys+Church+Kanjikuzhy+Idukki" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="mt-4 w-full py-3 px-4 rounded-xl bg-olive text-cream hover:bg-olive-dark text-center font-bold text-[10px] md:text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 group border border-gold/20"
+              >
+                <span>Navigate on Google Maps</span>
+                <i class="fa-solid fa-location-arrow group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-xs text-gold"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Reception Venue Card -->
+          <div class="bg-cream rounded-[1.5rem] p-5 md:p-8 border border-gold/20 shadow-sm relative flex flex-col justify-between transition-transform duration-300 hover:scale-[1.01] w-full">
+            <div>
+              <div class="w-10 h-10 rounded-full bg-white text-gold flex items-center justify-center mb-3 md:mb-4 shadow-sm">
+                <i class="fa-solid fa-gift text-sm"></i>
+              </div>
+              <h3 class="font-serif text-lg md:text-2xl text-olive font-bold mb-1">Reception & Dinner</h3>
+              <div class="flex items-center gap-1.5 text-[10px] md:text-xs text-oli font-bold uppercase tracking-wider mb-3 md:mb-4">
+                <i class="fa-solid fa-clock"></i>
+                <span>6:30 PM Onwards</span>
+              </div>
+              <p class="text-xs md:text-sm text-olive font-garamond leading-relaxed mb-4 md:mb-6 font-semibold">
+                Celebrate the union of Jibin & Thara with fine dining, warm toasts, and joyous laughter thereafter.
+              </p>
+            </div>
+            
+            <div class="border-t border-stone-200/60 pt-4 mt-auto">
+              <h4 class="font-serif text-sm font-bold text-olive font-bold">St. Mary's Marian Hall</h4>
+              <p class="text-[10px] md:text-[11px] text-stone-755 font-sans mt-1 font-bold">Kanjikuzhy, Idukki, Kerala, India</p>
+              
+              <!-- Eye-catching Map Link Button -->
+              <a 
+                href="https://maps.google.com/?q=St.+Marys+Parish+Hall+Kanjikuzhy+Idukki" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="mt-4 w-full py-3 px-4 rounded-xl bg-olive text-cream hover:bg-olive-dark text-center font-bold text-[10px] md:text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 group border border-gold/20"
+              >
+                <span>Navigate on Google Maps</span>
+                <i class="fa-solid fa-location-arrow group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-xs text-gold"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         6.5 LANDSCAPE SAVE THE DATE VIDEO SECTION
+         ========================================== -->
+    <section class="py-12 md:py-20 bg-white px-4 md:px-6 text-center w-full">
+      <div class="max-w-4xl mx-auto w-full">
+        <span class="text-xs uppercase tracking-[0.3em] text-gold font-bold block mb-2">Our Love Story</span>
+        <h2 class="font-cinzel text-2xl md:text-4xl text-olive font-semibold mb-2">
+          Save Our Date Film
+        </h2>
+        
+        <div class="flex items-center justify-center my-4 gap-3 text-gold/60">
+          <div class="w-12 h-[1px] bg-gold/50"></div>
+          <i class="fa-solid fa-clapperboard"></i>
+          <div class="w-12 h-[1px] bg-gold/50"></div>
+        </div>
+
+        <p class="font-garamond italic text-sm md:text-lg text-olive font-semibold max-w-lg mx-auto mb-6 md:mb-8 px-2">
+          "A glimpse of our moments, shared smiles, and the journey toward our fairytale forever."
+        </p>
+
+        <div class="relative max-w-3xl mx-auto bg-cream p-2 md:p-3 rounded-[1.5rem] shadow-xl border border-gold/20 overflow-hidden w-full">
+          <div class="aspect-video w-full rounded-xl overflow-hidden shadow-inner bg-black">
+            <video 
+              id="main-wedding-video" 
+              controls 
+              playsinline 
+              class="w-full h-full object-cover" 
+              poster="img/couple.jpg"
+            >
+              <source src="video/rr.mp4" type="video/mp4">
+              <source src="https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-holding-hands-and-walking-40011-large.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         7. REAL-TIME COUNTDOWN HEADER SECTION (Clean, Solid Background for Maximum Contrast)
+         ========================================== -->
+    <section class="py-12 md:py-16 bg-cream text-center px-4 w-full">
+      <!-- High-visibility styled header section directly before the background graphic image starts -->
+      <span class="text-xs md:text-sm uppercase tracking-[0.3em] text-gold font-bold block mb-2">The Countdown Has Begun</span>
+      <h2 class="font-cinzel text-2xl md:text-4xl text-olive font-semibold tracking-wider">
+        Counting Down To Our Forever
+      </h2>
+      <div class="w-16 h-[1.5px] bg-gold mx-auto mt-3"></div>
+    </section>
+
+    <!-- ==========================================
+         8. COUNTDOWN TIMER COMPONENT (With scaled, grand bw.jpg background image)
+         ========================================== -->
+    <!-- OPTIMIZATION: Increased vertical padding (py-32 md:py-44) and minimum height (min-h-[65vh] md:min-h-[75vh]) to enlarge image size -->
+    <section class="relative py-32 md:py-44 px-4 md:px-6 text-center text-white overflow-hidden w-full min-h-[65vh] md:min-h-[75vh] flex flex-col justify-center items-center">
+      <!-- Background Image Layer (bw.jpg) -->
+      <img 
+        src="img/journey2.jpg" 
+        alt="Countdown Ambient Background" 
+        class="absolute inset-0 w-full h-full object-cover pointer-events-none z-[-2]"
+        onerror="this.src='img/journey2.jpg'"
+      />
+      <!-- Rich semi-transparent dark olive-gray overlay to keep cards and typography highly legible -->
+      <div class="absolute inset-0 bg-olive-dark/40 pointer-events-none z-[-1]"></div>
+
+      <div class="max-w-4xl mx-auto w-full relative z-10 space-y-8 md:space-y-12">
+        
+        <!-- Premium Glassmorphism Timer Box -->
+        <div class="grid grid-cols-4 gap-3 md:gap-6 max-w-xl mx-auto py-4 select-none">
+          <!-- Days Box -->
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 md:p-6 border border-white/20 shadow-lg flex flex-col items-center">
+            <span id="countdown-days" class="text-2xl md:text-5xl font-cinzel text-cream font-bold drop-shadow">00</span>
+            <span class="text-[9px] md:text-[11px] text-gold uppercase tracking-[0.2em] font-semibold mt-1">Days</span>
+          </div>
+
+          <!-- Hours Box -->
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 md:p-6 border border-white/20 shadow-lg flex flex-col items-center">
+            <span id="countdown-hours" class="text-2xl md:text-5xl font-cinzel text-cream font-bold drop-shadow">00</span>
+            <span class="text-[9px] md:text-[11px] text-gold uppercase tracking-[0.2em] font-semibold mt-1">Hours</span>
+          </div>
+
+          <!-- Minutes Box -->
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 md:p-6 border border-white/20 shadow-lg flex flex-col items-center">
+            <span id="countdown-minutes" class="text-2xl md:text-5xl font-cinzel text-cream font-bold drop-shadow">00</span>
+            <span class="text-[9px] md:text-[11px] text-gold uppercase tracking-[0.2em] font-semibold mt-1">Min</span>
+          </div>
+
+          <!-- Seconds Box -->
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-3 md:p-6 border border-white/20 shadow-lg flex flex-col items-center">
+            <span id="countdown-seconds" class="text-2xl md:text-5xl font-cinzel text-cream font-bold drop-shadow text-gold animate-pulse">00</span>
+            <span class="text-[9px] md:text-[11px] text-gold uppercase tracking-[0.2em] font-semibold mt-1">Sec</span>
+          </div>
+        </div>
+
+        <p class="font-serif italic text-sm md:text-lg text-cream/95 max-w-md mx-auto px-4">
+          "And we would choose each other; in a hundred lifetimes, in any version of reality, we'd find you."
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         9. ROYAL ORNATE FOOTER
+         ========================================== -->
+    <footer class="bg-cream py-12 md:py-16 px-4 md:px-6 text-center relative overflow-hidden border-t border-[#FAF7F2] w-full">
+      <div class="max-w-2xl mx-auto border border-gold/30 py-10 px-4 md:px-8 relative bg-white/40 backdrop-blur-sm rounded-2xl shadow-[0_10px_35px_rgba(197,168,128,0.08)] w-full">
+        
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-cream px-4 py-0.5 text-gold flex items-center gap-1.5">
+          <i class="fa-solid fa-leaf text-xs"></i>
+          <i class="fa-solid fa-star text-[7px]"></i>
+          <i class="fa-solid fa-leaf transform -scale-x-100 text-xs"></i>
+        </div>
+
+        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-gold mx-auto flex items-center justify-center bg-white shadow-md mb-4 md:mb-6 hover:scale-105 transition-transform duration-300">
+          <span class="font-cinzel text-lg md:text-xl font-bold tracking-widest text-olive">J<span class="text-gold font-serif italic text-sm md:text-base">&</span>T</span>
+        </div>
+
+        <h2 class="font-cinzel text-xl md:text-3xl text-olive tracking-wider mb-2 font-medium">THANK YOU</h2>
+        <p class="font-serif italic text-gold text-xs md:text-sm tracking-[0.25em] mb-4">FOR BEING A PART OF OUR STORY</p>
+        
+        <p class="font-garamond text-sm md:text-lg text-olive max-w-md mx-auto leading-relaxed mb-6 italic font-bold">
+          "Your warm laughter, presence, and generous blessings have made our fairytale complete. We cannot wait to share our special day with you."
+        </p>
+
+        <div class="flex items-center justify-center gap-3 opacity-60">
+          <div class="w-12 md:w-16 h-[1px] bg-gold/50"></div>
+          <i class="fa-solid fa-heart text-gold text-[10px]"></i>
+          <div class="w-12 md:w-16 h-[1px] bg-gold/50"></div>
+        </div>
+
+        <p class="text-[9px] uppercase tracking-[0.35em] text-gold/90 mt-6 font-bold font-sans">
+          JIBIN & THARA • JULY 25, 2026
+        </p>
+
+        <div class="absolute -bottom-3.5 left-1/2 -translate-x-1/2 bg-cream px-4 py-0.5 text-gold flex items-center gap-1.5">
+          <i class="fa-solid fa-leaf transform scale-y-[-1] text-xs"></i>
+          <i class="fa-solid fa-star text-[7px]"></i>
+          <i class="fa-solid fa-leaf transform -scale-100 text-xs"></i>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ==========================================
+       JAVASCRIPT FUNCTIONAL LOGIC
+       ========================================== -->
+  <script>
+    const bgAudio = document.getElementById('bg-audio');
+    let isPlaying = false;
+    let isScratching = false;
+
+    // Carousel state with local image arrays matching both landscape & portrait
+    let activeSlide = 0;
+    const carouselSlides = [
+      {
+        image: 'img/car1.jpg',
+        fallback: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1000',
+        caption: 'Jibin & Thara — "Once in a while, right in the middle of an ordinary life, love gives us a fairytale."'
+      },
+      {
+        image: 'img/car2.jpg',
+        fallback: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000',
+        caption: 'The Promise — "An everlasting promise of love, faith, kindness, and devotion. Hand in hand, forever."'
+      },
+      {
+        image: 'img/car3.jpg',
+        fallback: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=1000',
+        caption: 'Our Beautiful Moments — "Surrounded by sweet laughter and beautiful memories that will light our path."'
+      },
+      {
+        image: 'img/car4.jpg',
+        fallback: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&q=80&w=1000',
+        caption: 'Walking Together — "With you, every single path is bathed in golden light. Growing together is our favorite adventure."'
+      },
+      {
+        image: 'img/car5.jpg',
+        fallback: 'https://images.unsplash.com/photo-1519225495810-7517cbd14bc4?auto=format&fit=crop&q=80&w=1000',
+        caption: 'The Joyful Hearts — "Deeply connected, endlessly supportive. Together we write a tale of absolute devotion."'
+      },
+      {
+        image: 'img/car6.jpg',
+        fallback: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&q=80&w=1000',
+        caption: 'The Future — "Looking forward to tomorrow and all the beautiful unwritten chapters we are destined to share."'
+      },
+      {
+        image: 'img/car7.jpg',
+        fallback: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&q=80&w=1000',
+        caption: 'The Future — "Looking forward to tomorrow and all the beautiful unwritten chapters we are destined to share."'
+      }
+    ];
+
+    let isScratchedOff = false;
+
+    // Toggle Music Control
+    function toggleMusic() {
+      const icon = document.getElementById('music-icon');
+      if (isPlaying) {
+        bgAudio.pause();
+        icon.className = 'fa-solid fa-volume-xmark text-stone-300';
+      } else {
+        bgAudio.play().catch(() => console.log('Audio deferred'));
+        icon.className = 'fa-solid fa-volume-high text-gold';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Switch Screen 1 to Screen 2
+    function openInvitation() {
+      document.getElementById('screen-splash').classList.add('hidden');
+      document.getElementById('screen-ribbon').classList.remove('hidden');
+      document.getElementById('screen-ribbon').classList.add('flex');
+    }
+
+    // Unravel Ribbon Transition to Screen 3
+    function unravelRibbon() {
+      const ribbonBox = document.getElementById('ribbon-box');
+      ribbonBox.classList.add('ribbon-unravel');
+      
+      setTimeout(() => {
+        document.getElementById('screen-ribbon').classList.add('hidden');
+        document.getElementById('screen-ribbon').classList.remove('flex');
+        
+        const main = document.getElementById('screen-main');
+        main.classList.remove('hidden');
+        
+        bgAudio.volume = 0.4;
+        bgAudio.play().then(() => {
+          isPlaying = true;
+          document.getElementById('music-icon').className = 'fa-solid fa-volume-high text-gold';
+        }).catch(e => console.log('Playback blocked by browser user guidelines'));
+        
+        initScratchCard();
+        renderCarouselIndicators();
+        updateCarousel(); 
+        
+        // Start live countdown timer loop
+        startCountdown();
+      }, 1100);
+    }
+
+    // SCRATCH-OFF CARD FUNCTIONAL LOGIC
+    const canvas = document.getElementById('scratch-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function initScratchCard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, '#C5A880');
+      gradient.addColorStop(0.5, '#E2CBA9');
+      gradient.addColorStop(1, '#B3966E');
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = 'rgba(250, 247, 242, 0.4)';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(8, 8, canvas.width - 16, canvas.height - 16);
+
+      ctx.beginPath();
+      ctx.arc(canvas.width / 2, canvas.height / 2, 40, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'rgba(250, 247, 242, 0.2)';
+      ctx.stroke();
+
+      ctx.fillStyle = '#2B3B2E'; 
+      ctx.font = 'bold 12px Cinzel, serif';
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
+      ctx.fillText('SCRATCH TO REVEAL', canvas.width / 2, canvas.height / 2 - 12);
+
+      ctx.font = 'italic 11px Playfair Display, serif';
+      ctx.fillStyle = '#FAF7F2';
+      ctx.fillText('our wedding date', canvas.width / 2, canvas.height / 2 + 14);
+
+      canvas.addEventListener('mousedown', startScratch);
+      canvas.addEventListener('mousemove', scratchMove);
+      window.addEventListener('mouseup', stopScratch);
+
+      canvas.addEventListener('touchstart', startScratch);
+      canvas.addEventListener('touchmove', scratchMove);
+      window.addEventListener('touchend', stopScratch);
+    }
+
+    function getMousePos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      return {
+        x: (clientX - rect.left) * scaleX,
+        y: (clientY - rect.top) * scaleY
+      };
+    }
+
+    function startScratch(e) {
+      isScratching = true;
+      scratch(e);
+      if (e.cancelable) e.preventDefault();
+    }
+
+    function scratchMove(e) {
+      if (!isScratching) return;
+      scratch(e);
+      if (e.cancelable) e.preventDefault();
+    }
+
+    function triggerConfetti() {
+      const champagneColors = ['#F0E6D2', '#E8D8B8', '#C5A880', '#FAF7F2', '#EAE5DC', '#B3966E'];
+      
+      confetti({
+        particleCount: 140,
+        spread: 85,
+        origin: { y: 0.6 },
+        colors: champagneColors
+      });
+      setTimeout(() => {
+        confetti({
+          particleCount: 60,
+          angle: 60,
+          spread: 60,
+          origin: { x: 0, y: 0.8 },
+          colors: champagneColors
+        });
+        confetti({
+          particleCount: 60,
+          angle: 120,
+          spread: 60,
+          origin: { x: 1, y: 0.8 },
+          colors: champagneColors
+        });
+      }, 200);
+    }
+
+    function revealDateVows() {
+      isScratchedOff = true;
+      
+      canvas.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
+      canvas.style.opacity = '0';
+      canvas.style.pointerEvents = 'none';
+
+      setTimeout(() => {
+        canvas.remove();
+      }, 800);
+
+      const scriptureBox = document.getElementById('revealed-scripture-box');
+      if (scriptureBox) {
+        scriptureBox.classList.remove('opacity-0', 'scale-95', '-translate-y-2', 'pointer-events-none');
+        scriptureBox.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+      }
+
+      triggerConfetti();
+    }
+
+    function stopScratch() {
+      if (!isScratching) return;
+      isScratching = false;
+      checkScratchPercentage();
+    }
+
+    function scratch(e) {
+      const pos = getMousePos(e);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, 22, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function checkScratchPercentage() {
+      try {
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const pixels = imgData.data;
+        let transparent = 0;
+        
+        for (let i = 3; i < pixels.length; i += 4) {
+          if (pixels[i] === 0) {
+            transparent++;
+          }
+        }
+        
+        const percentage = (transparent / (canvas.width * canvas.height)) * 100;
+        if (percentage >= 45) {
+          revealDateVows();
+        }
+      } catch (e) {
+        console.error("Context limitation guard active: ", e);
+      }
+    }
+
+    // Carousel controls
+    function renderCarouselIndicators() {
+      const container = document.getElementById('slide-indicators');
+      container.innerHTML = '';
+      carouselSlides.forEach((_, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `w-2 h-2 rounded-full transition-all ${idx === activeSlide ? 'bg-gold scale-125' : 'bg-stone-300'}`;
+        btn.onclick = () => jumpToSlide(idx);
+        container.appendChild(btn);
+      });
+    }
+
+    /* OPTIMIZED SYNCHRONIZED CAROUSEL UPDATE ENGINE
+       Preloads the image source completely prior to triggering layout/content replacements.
+       This prevents mismatch latency where caption texts updated before high-res pictures loaded.
+    */
+    let carouselRequestId = 0;
+    function updateCarousel() {
+      const img = document.getElementById('carousel-img');
+      const caption = document.getElementById('carousel-caption');
+      const box = document.getElementById('carousel-box');
+      
+      const current = carouselSlides[activeSlide];
+      
+      carouselRequestId++;
+      const currentId = carouselRequestId;
+
+      if (box) {
+        box.style.opacity = '0.4';
+      }
+
+      const tempImg = new Image();
+      
+      tempImg.onload = function() {
+        if (currentId !== carouselRequestId) return;
+        
+        img.src = current.image;
+        caption.textContent = current.caption;
+        renderCarouselIndicators();
+        
+        if (box) {
+          box.style.opacity = '1';
+        }
+      };
+
+      tempImg.onerror = function() {
+        if (currentId !== carouselRequestId) return;
+        
+        img.src = current.fallback;
+        caption.textContent = current.caption;
+        renderCarouselIndicators();
+        
+        if (box) {
+          box.style.opacity = '1';
+        }
+      };
+
+      tempImg.src = current.image;
+    }
+
+    // Next/Prev slide
+    window.nextSlide = function() {
+      activeSlide = (activeSlide + 1) % carouselSlides.length;
+      updateCarousel();
+    }
+
+    window.prevSlide = function() {
+      activeSlide = (activeSlide - 1 + carouselSlides.length) % carouselSlides.length;
+      updateCarousel();
+    }
+
+    window.jumpToSlide = function(idx) {
+      activeSlide = idx;
+      updateCarousel();
+    }
+
+    // Toggle families collapsible text
+    window.toggleFamily = function(family) {
+      const details = document.getElementById(`${family}-family-details`);
+      const text = document.getElementById(`${family}-toggle-text`);
+      const icon = document.getElementById(`${family}-toggle-icon`);
+
+      if (details.classList.contains('open')) {
+        details.classList.remove('open');
+        text.textContent = 'See Parents & Address';
+        icon.classList.remove('rotate-180');
+      } else {
+        details.classList.add('open');
+        text.textContent = 'See Parents & Address';
+        icon.classList.add('rotate-180');
+      }
+    }
+
+    // Countdown Timer Loop Setup
+    function startCountdown() {
+      // July 25, 2026, 3:00 PM local time
+      const weddingDate = new Date("July 25, 2026 15:00:00").getTime();
+      
+      function updateTimer() {
+        const now = new Date().getTime();
+        const difference = weddingDate - now;
+
+        if (difference < 0) {
+          // Wedding day has arrived!
+          document.getElementById('countdown-days').textContent = "00";
+          document.getElementById('countdown-hours').textContent = "00";
+          document.getElementById('countdown-minutes').textContent = "00";
+          document.getElementById('countdown-seconds').textContent = "00";
+          return;
+        }
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        // Render digits with zero padding
+        document.getElementById('countdown-days').textContent = days < 10 ? '0' + days : days;
+        document.getElementById('countdown-hours').textContent = hours < 10 ? '0' + hours : hours;
+        document.getElementById('countdown-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('countdown-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+      }
+
+      // Pre-fire loop and trigger loop interval
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+  </script>
+</body>
+</html>
