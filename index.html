@@ -589,7 +589,7 @@
                 <i class="fa-solid fa-gift text-sm"></i>
               </div>
               <h3 class="font-serif text-lg md:text-2xl text-olive font-bold mb-1">Reception & Dinner</h3>
-              <div class="flex items-center gap-1.5 text-[10px] md:text-xs text-oli font-bold uppercase tracking-wider mb-3 md:mb-4">
+              <div class="flex items-center gap-1.5 text-[10px] md:text-xs text-olive font-bold uppercase tracking-wider mb-3 md:mb-4">
                 <i class="fa-solid fa-clock"></i>
                 <span>6:30 PM Onwards</span>
               </div>
@@ -661,7 +661,6 @@
          7. REAL-TIME COUNTDOWN HEADER SECTION (Clean, Solid Background for Maximum Contrast)
          ========================================== -->
     <section class="py-12 md:py-16 bg-cream text-center px-4 w-full">
-      <!-- High-visibility styled header section directly before the background graphic image starts -->
       <span class="text-xs md:text-sm uppercase tracking-[0.3em] text-gold font-bold block mb-2">The Countdown Has Begun</span>
       <h2 class="font-cinzel text-2xl md:text-4xl text-olive font-semibold tracking-wider">
         Counting Down To Our Forever
@@ -672,7 +671,6 @@
     <!-- ==========================================
          8. COUNTDOWN TIMER COMPONENT (With scaled, grand bw.jpg background image)
          ========================================== -->
-    <!-- OPTIMIZATION: Increased vertical padding (py-32 md:py-44) and minimum height (min-h-[65vh] md:min-h-[75vh]) to enlarge image size -->
     <section class="relative py-32 md:py-44 px-4 md:px-6 text-center text-white overflow-hidden w-full min-h-[65vh] md:min-h-[75vh] flex flex-col justify-center items-center">
       <!-- Background Image Layer (bw.jpg) -->
       <img 
@@ -811,6 +809,7 @@
     ];
 
     let isScratchedOff = false;
+    let autoplayInterval;
 
     // Toggle Music Control
     function toggleMusic() {
@@ -852,11 +851,47 @@
         
         initScratchCard();
         renderCarouselIndicators();
+        
+        // Preload all carousel images in background to remove Vercel network load lags completely
+        preloadCarouselImages();
+        
         updateCarousel(); 
         
         // Start live countdown timer loop
         startCountdown();
+
+        // Start autoplay for memories carousel
+        startAutoplay();
       }, 1100);
+    }
+
+    // Preloads all images into memory for instant transitions on remote hosts (like Vercel)
+    function preloadCarouselImages() {
+      carouselSlides.forEach(slide => {
+        const primaryImg = new Image();
+        primaryImg.src = slide.image;
+        const fallbackImg = new Image();
+        fallbackImg.src = slide.fallback;
+      });
+    }
+
+    // Autoplay implementation for the memories slider
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayInterval = setInterval(() => {
+        activeSlide = (activeSlide + 1) % carouselSlides.length;
+        updateCarousel();
+      }, 4500); // Transitions to next image every 4.5 seconds
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+      }
+    }
+
+    function resetAutoplay() {
+      startAutoplay();
     }
 
     // SCRATCH-OFF CARD FUNCTIONAL LOGIC
@@ -979,6 +1014,7 @@
       checkScratchPercentage();
     }
 
+    // Scratch trace vector
     function scratch(e) {
       const pos = getMousePos(e);
       ctx.globalCompositeOperation = 'destination-out';
@@ -1008,7 +1044,7 @@
       }
     }
 
-    // Carousel controls
+    // Carousel indicators rendering
     function renderCarouselIndicators() {
       const container = document.getElementById('slide-indicators');
       container.innerHTML = '';
@@ -1020,9 +1056,9 @@
       });
     }
 
-    /* OPTIMIZED SYNCHRONIZED CAROUSEL UPDATE ENGINE
-       Preloads the image source completely prior to triggering layout/content replacements.
-       This prevents mismatch latency where caption texts updated before high-res pictures loaded.
+    /* SYNCHRONIZED CAROUSEL ENGINE
+       This sets the raw file paths and lets the image determine height automatically,
+       avoiding any artificial cropping, object-cover modifications, or stretching.
     */
     let carouselRequestId = 0;
     function updateCarousel() {
@@ -1068,20 +1104,23 @@
       tempImg.src = current.image;
     }
 
-    // Next/Prev slide
+    // Next/Prev slide - manual slide actions reset the autoplay interval
     window.nextSlide = function() {
       activeSlide = (activeSlide + 1) % carouselSlides.length;
       updateCarousel();
+      resetAutoplay();
     }
 
     window.prevSlide = function() {
       activeSlide = (activeSlide - 1 + carouselSlides.length) % carouselSlides.length;
       updateCarousel();
+      resetAutoplay();
     }
 
     window.jumpToSlide = function(idx) {
       activeSlide = idx;
       updateCarousel();
+      resetAutoplay();
     }
 
     // Toggle families collapsible text
